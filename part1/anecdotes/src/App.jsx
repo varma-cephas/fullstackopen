@@ -13,7 +13,7 @@ function App() {
   ]
 
   const [selectedQuote, setSeletedQuote] = useState(0)
-  const [vote, setVote]= useState({})
+  const [vote, setVote]= useState([0,0,0,0,0,0,0])
 
   const randomNum = (max)=> Math.floor(Math.random() * max)
 
@@ -21,11 +21,18 @@ function App() {
     setSeletedQuote(randomNum(anecdotes.length))
   }
 
+
+  const getVote = () => {
+    const copyVote = [...vote];
+    copyVote[selectedQuote] += 1
+    setVote(copyVote)
+  }
+
   return (
     <>
       <div>{anecdotes[selectedQuote]}</div>
-      <div>has votes</div>
-      <button onClick={voteQuote}>vote</button>
+      <div>has {vote[selectedQuote]} votes</div>
+      <button onClick={getVote}>vote</button>
       <button onClick={getRandomQuote}>next quote</button>
     </>
   )
